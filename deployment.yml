@@ -1,0 +1,50 @@
+# Service that is the way into the deployment, balances requests across
+# available nodes based on their status
+apiVersion: v1
+kind: Service
+metadata:
+  name: ojbdetect-service
+spec:
+  selector:
+    app: objdetect
+  ports:
+  - protocol: "TCP"
+    # Run this pod on this internal port
+    port: 6000
+    # Forward requests to pods on this port
+    targetPort: 5009
+    # Access the deployment on this port
+    nodePort: 30000
+  type: LoadBalancer
+---
+# Object detection pod coordination and blueprint
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: objdetect-deployment
+  labels:
+    app: objdetect
+spec:
+  # Ideal number of pods
+  replicas: 3
+  selector:
+    matchLabels:
+      app: objdetect
+  template:
+    metadata:
+      labels:
+        app: objdetect
+    spec:
+      containers:
+      - name: objdetect-container
+        # Pull already build base image
+        image: yohanderose/5225_ojbdetector
+        # Request .5 cpu and limit to .5 as well
+        resources:
+          limits:
+            cpu: "0.5"
+          requests:
+            cpu: "0.5"
+        ports:
+        # Run pods on this internal port
+        - containerPort: 5009
