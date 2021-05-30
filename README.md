@@ -1,11 +1,9 @@
-# Object Detection Web Service
+TagTag: A Modern Image Storage on the Cloud
 
-Object Detection web service within a containerised environment using Docker and Kubernetes. You can run this locally and on a remote server using Kind - a single machine abstraction for Kubernetes.
+Image-search-engine aims at developing a cloudified solution using AWS where a user uploads images and can retrieve the URLs of the images by specifying the tags(objects detected from the images) using AWS services such as Simple Storage Service (S3), Lambda, API Gateway and Cognito
 
-- [Github Repo](https://github.com/yohanderose/object-detection-webservice.git)
-- [Docker Base Image](https://hub.docker.com/r/yohanderose/5225_ojbdetector)
-- [YouTube Video](https://www.youtube.com/watch?v=5oJUDmqMXdc&t=2s)
-- Nectar Instance (3 Pods) @ 115.146.86.35:80
+- [Github Repo](https://github.com/yohanderose/Image-Search-Engine.git)
+
 
 ![](./arch-overview.png)
 
